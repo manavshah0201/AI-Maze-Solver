@@ -8,7 +8,7 @@
 import numpy as np
 import time
 import random
-from IPython.display import clear_output
+import os
 
 # Step 2: Defining the maze layout
 # The maze can be changed for difficulty
@@ -160,7 +160,7 @@ def run_agent():
     while state != goal:
 
         # clear the screen for next move
-        clear_output(wait=True)
+        os.system('cls' if os.name == 'nt' else 'clear')
 
         # show maze
         display_maze(state)
@@ -179,7 +179,7 @@ def run_agent():
     if state == goal:
 
       # Clears screen
-      clear_output(wait=True)
+      os.system('cls' if os.name == 'nt' else 'clear')
 
       # show maze
       display_maze(state)
@@ -225,7 +225,7 @@ for ep in range(episodes):
 
   if state == goal:
     if (ep+1) % 20 == 0:
-      clear_output(wait=True)
+      os.system('cls' if os.name == 'nt' else 'clear')
       print(f"Episode {ep+1}/{episodes} completed")
 
 # Step 13: Runs the function to show final result
