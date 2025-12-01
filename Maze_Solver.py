@@ -70,11 +70,12 @@ def take_action(state, action):
 
 # Step 6: Defining parameters that guide the learning of the agent
 
-epsilon = 0.8     # epsilon value determines whether the agent explores or exploits
+epsilon = 0.9     # epsilon value determines whether the agent explores or exploits
 decay_rate = 0.99 # rate of decrease for epsilon value
-min_epsilon = 0.1 # lowest value that epsilon can go to
+min_epsilon = 0.2 # lowest value that epsilon can go to
+
 alpha = 0.2       # alpha is the learning rate
-gamma = 0.2       # gamma is the discount factor
+gamma = 0.5       # gamma is the discount factor
 
 start = (0, 0)    # starting position
 goal = (9, 9)     # ending position(goal)
@@ -119,11 +120,14 @@ for ep in range(episodes):
     # move the agent to next state
     state = next_state
 
+    # lowering epsilon value
+    epsilon = max(min_epsilon, epsilon * decay_rate)
+
     # end the episode when goal is reached
     if state == goal:
 
       # Shows progress
-      if (ep+1) % 10 == 0:
+      if (ep+1) % 20 == 0:
         print(f"Episode {ep+1}/{episodes} completed")
 
         break
