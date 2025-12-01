@@ -1,5 +1,7 @@
 # Manav Shah
+# 2025/11/30
 # AI Maze Solver
+# Has been successfully tested on maze sizes up to 40x40
 
 # Step 1: Importing libraries
 
@@ -11,7 +13,7 @@ from IPython.display import clear_output
 # Step 2: Defining the maze layout
 # The maze can be changed for difficulty
 # "S" represents the start, "G" represents the goal or end, " " represents empty space(usable), and "#" represents a wall(unusable)
-# Maze needs to be nested arrays to provide 2 dimensions
+# Maze needs to be formatted with nested arrays to provide 2 dimensions
 
 maze = [
     ['S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#'],
@@ -70,6 +72,10 @@ for a in range(rows):
   for b in range(cols):
     if maze[a][b] != "#":
       Q[(a, b)] = np.zeros(len(actions))
+    if maze[a][b] == "S":
+      start = (a,b)
+    elif maze[a][b] == "G":
+      goal = (a,b)
 
 # Step 5: Defining the function to take the action and give a reward for the action
 
@@ -106,9 +112,6 @@ min_epsilon = 0.2 # lowest value that epsilon can go to
 
 alpha = 0.2       # alpha is the learning rate
 gamma = 1       # gamma is the discount factor
-
-start = (0, 0)    # starting position
-goal = (39, 39)     # ending position(goal)
 
 episodes = 5000   # the amount of times the agent runs through the maze to learn
 
