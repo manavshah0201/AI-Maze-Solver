@@ -100,7 +100,7 @@ def take_action(state, action):
 
 # Step 6: Defining parameters that guide the learning of the agent
 
-epsilon = 0.9     # epsilon value determines whether the agent explores or exploits
+epsilon = 0.8     # epsilon value determines whether the agent explores or exploits
 decay_rate = 0.995 # rate of decrease for epsilon value
 min_epsilon = 0.2 # lowest value that epsilon can go to
 
@@ -131,7 +131,65 @@ def update_Q(state, action_index, reward, next_state):
   best_next = np.max(Q[next_state])
   Q[state][action_index] += alpha * (reward + gamma * best_next - Q[state][action_index])
 
-# Step 9: Training the agent through repitition
+# Step 9: Defining the function that shows the agents position in the maze
+
+def display_maze(agent_pos):
+
+    row, col = agent_pos
+    maze[row][col] = f"\033[91m*\033[0m"
+
+    for r in range(rows):
+        row_display = ""
+        for c in range(cols):
+            if (r, c) == agent_pos:
+                row_display += "A "   # Agent
+            else:
+                row_display += maze[r][c] + " "
+        print(row_display)
+    print()
+
+# Step 10: Defines the function that shows the final result of its learning (The shortest path it could find)
+
+def run_agent():
+    state = start
+    steps = 0
+
+    while state != goal:
+
+        # clear the screen for next move
+        clear_output(wait=True)
+
+        # show maze
+        display_maze(state)
+
+        # choose best learned action (NO exploration)
+        action_index = np.argmax(Q[state])
+        action = actions[action_index]
+
+        # move
+        next_state, reward = take_action(state, action)
+        state = next_state
+
+        time.sleep(0.1)  # slow down so you can see movement
+        steps += 1
+
+    if state == goal:
+
+      # Clears screen
+      clear_output(wait=True)
+
+      # show maze
+      display_maze(state)
+      print("Goal reached in", steps, "steps!")
+
+# Step 11: Defines the function to show the final Q-table
+
+def show_Q_table():
+  print("Final Q-table:\n")
+  for state in sorted(Q.keys()):
+    print(f"{state}: {Q[state]}")
+
+# Step 12: Training the agent through repitition
 
 for ep in range(episodes):
   state = start
@@ -164,61 +222,8 @@ for ep in range(episodes):
 
   if state == goal:
     if (ep+1) % 20 == 0:
-      print(f"Episode {ep+1}/{episodes} completed")
-
-# Step 10: Defining the function that shows the agents position in the maze
-
-def display_maze(agent_pos):
-    for r in range(rows):
-        row_display = ""
-        for c in range(cols):
-            if (r, c) == agent_pos:
-                row_display += "A "   # Agent
-            else:
-                row_display += maze[r][c] + " "
-        print(row_display)
-    print()
-
-# Step 11: Defines the function that shows the final result of its learning (The shortest path it could find)
-
-def run_agent():
-    state = start
-    steps = 0
-
-    while state != goal:
-
-        # clear the screen for next move
-        clear_output(wait=True)
-
-        # show maze
-        display_maze(state)
-
-        # choose best learned action (NO exploration)
-        action_index = np.argmax(Q[state])
-        action = actions[action_index]
-
-        # move
-        next_state, reward = take_action(state, action)
-        state = next_state
-
-        time.sleep(0.4)  # slow down so you can see movement
-        steps += 1
-
-    if state == goal:
-
-      # Clears screen
       clear_output(wait=True)
-
-      # show maze
-      display_maze(state)
-      print("Goal reached in", steps, "steps!")
-
-# Step 12: Defines the function to show the final Q-table
-
-def show_Q_table():
-  print("Final Q-table:\n")
-  for state in sorted(Q.keys()):
-    print(f"{state}: {Q[state]}")
+      print(f"Episode {ep+1}/{episodes} completed")
 
 # Step 13: Runs the function to show final result
 
