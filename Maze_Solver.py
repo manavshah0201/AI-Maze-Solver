@@ -15,6 +15,8 @@ import os
 # "S" represents the start, "G" represents the goal or end, " " represents empty space(usable), and "#" represents a wall(unusable)
 # Maze needs to be formatted with nested arrays to provide 2 dimensions
 
+# You may copy and paste one of the pre-made files from the Mazes folder, or make your own using the provided format
+
 maze = [
     ['S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#'],
     [' ', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', '#', '#', ' ', '#', ' ', '#', '#', '#', '#', '#'],
