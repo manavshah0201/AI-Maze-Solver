@@ -1,7 +1,7 @@
 # Manav Shah
 # 2025/11/30
 # AI Maze Solver
-# Has been successfully tested on maze sizes up to 40x40
+# Has been successfully tested on maze sizes up to 50x50
 
 # Step 1: Importing libraries
 
